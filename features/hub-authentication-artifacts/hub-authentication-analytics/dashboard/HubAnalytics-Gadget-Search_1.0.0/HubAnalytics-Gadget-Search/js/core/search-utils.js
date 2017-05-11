@@ -80,11 +80,12 @@ $(document).ready(function() {
                             "pageLength": 10,
                             "lengthChange": true,
                             "dom": '<"dataTablesTop"' +
+                            'f' +
                             '<"dataTables_toolbar">' +
                             '>' +
                             'rt' +
                             '<"dataTablesBottom"' +
-                            'ipf' +
+                            'ip' +
                             '>',
                             "info":true,
                             "columnDefs": [

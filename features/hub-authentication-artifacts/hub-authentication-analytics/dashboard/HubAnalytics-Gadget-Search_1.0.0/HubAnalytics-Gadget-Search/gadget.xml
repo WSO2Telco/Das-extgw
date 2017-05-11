@@ -68,10 +68,11 @@
                             </div>
                         </div>
                          <button type="button" id="searchbtn" class="btn btn-primary col-1">Search</button>
+
                     </div>
 
  <div class="row" style="margin-top:3%;">
-                    <div class="col-12" style="height:600px;">
+                    <div class="col-12" style="height:600px; overflow:auto;">
                         <div id="canvas">
                         </div>
                     </div>
