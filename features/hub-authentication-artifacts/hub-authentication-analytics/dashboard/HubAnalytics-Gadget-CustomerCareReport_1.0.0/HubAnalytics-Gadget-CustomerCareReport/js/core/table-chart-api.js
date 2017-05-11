@@ -84,7 +84,6 @@ var getConfig, validate, isProviderRequired, draw, update, setTableInfo;
         for(var i = 0; i < data.length; i++ ) {
             no = i + 1;
             data[i].no = no;
-
             try {
             var json =  data[i].jsonBody.replace(/\\n/g, "")
                                       .replace(/\\'/g, "\\'")
@@ -97,6 +96,7 @@ var getConfig, validate, isProviderRequired, draw, update, setTableInfo;
                                       .replace(/\\f/g, "\\f");
 
             data[i].jsonContent = JsonHuman.format(JSON.parse(json)).outerHTML;
+
         }
         catch (e) {
             data[i].jsonContent = data[i].jsonBody;
@@ -160,6 +160,40 @@ var getConfig, validate, isProviderRequired, draw, update, setTableInfo;
                         update(settings);
                     });
                 });
+
+                table.clear();
+                for(var i = 0; i < data.length; i++ ) {
+                    data[i].no = i+1;
+                    var responseTime_unix = data[i].responseTime;
+                    var responseTime_unix_sec = parseInt(responseTime_unix/1000);
+                    var responseTime_dateTime =  moment.unix(responseTime_unix_sec).format("MM-DD-YYYY HH:mm:ss");
+                    data[i].responseTime = responseTime_dateTime;
+                    try {
+                        var json =  data[i].jsonBody.replace(/\\n/g, "")
+                            .replace(/\\'/g, "\\'")
+                            .replace(/\\"/g, '\\"')
+                            .replace(/\\&/g, "\\&")
+                            .replace(/\\r/g, "\\r")
+                            .replace(/\\t/g, "\\t")
+                            .replace(/\\b/g, "\\b")
+                            .replace("%", "")
+                            .replace(/\\f/g, "\\f");
+                        data[i].jsonContent = JsonHuman.format(JSON.parse(json)).outerHTML;
+                    }
+                    catch (e) {
+                        data[i].jsonContent = data[i].jsonBody;
+                    }
+                }
+                var recordsArray = [];
+                for (var j = 0; j < data.length; j++) {
+                    var temp = [];
+                    temp.push(parseInt(data[j].no));
+                    temp.push(data[j].responseTime);
+                    temp.push(data[j].api);
+                    temp.push(data[j].jsonContent);
+                    recordsArray.push(temp);
+                }
+                table.rows.add(recordsArray).draw();
             }
 
         } catch (e) {
