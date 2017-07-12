@@ -199,13 +199,13 @@ div.dataTables_scrollHead table.table-bordered {
  */
 .table.dataTable tbody tr.active td,
 .table.dataTable tbody tr.active th {
-	background-color: #000;
+	background-color: #08C;
 	color: white;
 }
 
 .table.dataTable tbody tr.active:hover td,
 .table.dataTable tbody tr.active:hover th {
-	background-color: red !important;
+	background-color: #0075b0 !important;
 }
 
 .table.dataTable tbody tr.active th > a,

@@ -1,0 +1,21 @@
+td.details-control {
+    background: url('../resources/show.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../resources/hide.png') no-repeat center center;
+}
+
+.dark td.details-control {
+    background: #444444 url('../resources/show.png') no-repeat center center !important;
+    cursor: pointer;
+}
+.dark tr.shown td.details-control {
+    background: #444444 url('../resources/hide.png') no-repeat center center !important;
+}
+
+td pre{
+    background-color:#fff;
+    font-size: 13px;
+    border: 1px solid #ccc;
+}
