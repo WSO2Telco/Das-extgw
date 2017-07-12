@@ -1,6 +1,6 @@
 {
     "id":"HubAnalytics-Dashboard-Reporting",
-    "title":"Hub Analytics",
+    "title":"External gateway Analytics",
     "description":"",
     "permissions":{
         "viewers":[
@@ -16,7 +16,7 @@
     "pages":[
         {
             "id":"traffic-report",
-            "title":"Traffic Report",
+            "title":"Traffic",
             "isanon":false,
             "content":{
                 "default":{
@@ -82,7 +82,7 @@
         },
         {
             "id":"transaction-report",
-            "title":"Transaction Report",
+            "title":"Transaction",
             "isanon":false,
             "content":{
                 "default":{
@@ -149,7 +149,7 @@
         },
         {
             "id":"customer-care-report",
-            "title":"Customer Care Report",
+            "title":"Customer Care",
             "isanon":false,
             "content":{
                 "default":{
@@ -229,7 +229,7 @@
         },
         {
             "id":"response-time-report",
-            "title":"Response Time Report",
+            "title":"Response Time",
             "isanon":false,
             "content":{
                 "default":{
@@ -300,7 +300,7 @@
             "id":"traffic-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Traffic Report",
+            "title":"Traffic",
             "subordinates":[
 
             ]
@@ -309,7 +309,7 @@
             "id":"transaction-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Transaction Report",
+            "title":"Transaction",
             "subordinates":[
 
             ]
@@ -318,7 +318,7 @@
             "id":"customer-care-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Customer Care Report",
+            "title":"Customer Care",
             "subordinates":[
 
             ]
@@ -327,7 +327,7 @@
             "id":"response-time-report",
             "isanon":false,
             "ishidden":false,
-            "title":"Response Time Report",
+            "title":"Response Time",
             "subordinates":[
 
             ]

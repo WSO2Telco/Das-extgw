@@ -26,7 +26,7 @@ $(function () {
     var PROVIDER_CONF = 'provider-conf';
 
     var REFRESH_INTERVAL = 'refreshInterval';
-    var operatorId = 0, serviceProviderId = 0, apiId = 0, applicationId = 0, apiN='';
+    var operatorId = 0, serviceProviderId = 0, apiId = 0, applicationId = 0;
 
     var init = function () {
         $.ajax({
@@ -40,7 +40,7 @@ $(function () {
                 conf.serviceProvider = serviceProviderId;
                 conf.api = apiId;
                 conf.applicationName = applicationId;
-conf.apiName = apiN;
+
                 $.ajax({
                     url: gadgetLocation + '/gadget-controller.jag?action=getSchema',
                     method: "POST",
@@ -83,14 +83,11 @@ conf.apiName = apiN;
 
     $("#button-generate").click(function () {
         $("#canvas").html("");
-        $("#output").html("");
         getGadgetLocation(function (gadget_Location) {
             gadgetLocation = gadget_Location;
-
             conf.operator = operatorId;
             conf.serviceProvider = serviceProviderId;
             conf.api = apiId;
-            conf.apiName = apiN;
             conf.applicationName = applicationId;
 
             conf.dateStart = moment(moment($("#reportrange").text().split("-")[0]).format("MMMM D, YYYY hh:mm A")).valueOf();
@@ -150,10 +147,7 @@ conf.apiName = apiN;
         gadgetLocation = gadget_Location;
         init();
         loadOperator();
-        // loadSP();
-        // loadApp();
-        // loadApi();
-
+		
           function loadOperator (){
                       conf["provider-conf"]["tableName"] = "ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_OPERATOR_SUMMARY";
                       conf["provider-conf"]["provider-name"] = "operator";
@@ -171,7 +165,7 @@ conf.apiName = apiN;
                               var operatorIds = [];
                               var loadedOperator = [];
                               operatorIds.push(operatorId);
-                              operatorsItems += '<li><a data-val="0" href="#">All</a></li>';
+                              operatorsItems += '<li><a data-val="0" href="#">All Operator</a></li>';
                               for (var i =0 ; i < data.length; i++) {
                                   var operator = data[i];
                                   if($.inArray(operator.operatorId, loadedOperator)<0){
@@ -181,12 +175,12 @@ conf.apiName = apiN;
                                 }
                               }
                               $("#dropdown-operator").html( $("#dropdown-operator").html() + operatorsItems);
-                              $("#button-operator").val('<li><a data-val="0" href="#">All</a></li>');
+                              $("#button-operator").val('<li><a data-val="0" href="#">All Operator</a></li>');
                               loadSP(operatorIds);
 
                               $("#dropdown-operator li a").click(function(){
                                   $("#button-operator").text($(this).text());
-                                  $("#button-operator").append('<span class="caret"></span>');
+                                  $("#button-operator").append('&nbsp;<span class="caret"></span>');
                                   $("#button-operator").val($(this).text());
                                   operatorIds = $(this).data('val');
                                   loadSP(operatorIds);
@@ -212,7 +206,7 @@ conf.apiName = apiN;
                     var spIds = [];
                     var loadedSps = [];
                     spIds.push(serviceProviderId);
-                    spItems += '<li><a data-val="0" href="#">All</a></li>';
+                    spItems += '<li><a data-val="0" href="#">All Service Provider</a></li>';
                     for ( var i =0 ; i < data.length; i++) {
                         var sp = data[i];
                         if($.inArray(sp.serviceProviderId, loadedSps)<0){
@@ -224,13 +218,13 @@ conf.apiName = apiN;
 
                     $("#dropdown-sp").html(spItems);
 
-                    $("#button-sp").text('All');
-                    $("#button-sp").val('<li><a data-val="0" href="#">All</a></li>');
+                 //   $("#button-sp").text('All');
+                    $("#button-sp").val('<li><a data-val="0" href="#">All Service Provider</a></li>');
                     loadApp(spIds);
                     $("#dropdown-sp li a").click(function(){
 
                         $("#button-sp").text($(this).text());
-                        $("#button-sp").append('<span class="caret"></span>');
+                        $("#button-sp").append('&nbsp;<span class="caret"></span>');
                         $("#button-sp").val($(this).text());
                         // var clickedSP = [];
                         // clickedSP.push($(this).data('val'));
@@ -261,7 +255,7 @@ conf.apiName = apiN;
                 $("#dropdown-app").empty();
                 var apps = [];
                 var loadedApps = [];
-                var appItems = '<li><a data-val="0" href="#">All</a></li>';
+                var appItems = '<li><a data-val="0" href="#">All Application</a></li>';
                 apps.push(applicationId);
                 for ( var i =0 ; i < data.length; i++) {
                     var app = data[i];
@@ -273,8 +267,8 @@ conf.apiName = apiN;
                 }
 
                 $("#dropdown-app").html( $("#dropdown-app").html() + appItems);
-                $("#button-app").val('<li><a data-val="0" href="#">All</a></li>');
-                $("#button-app").text('All');
+                $("#button-app").val('<li><a data-val="0" href="#">All Application</a></li>');
+            //    $("#button-app").text('All');
                 // loadApp(sps[i]);
 
                 loadApi(apps);
@@ -282,7 +276,7 @@ conf.apiName = apiN;
                 $("#dropdown-app li a").click(function(){
 
                     $("#button-app").text($(this).text());
-                    $("#button-app").append('<span class="caret"></span>');
+                    $("#button-app").append('&nbsp;<span class="caret"></span>');
                     $("#button-app").val($(this).text());
                     // var clickedSP = [];
                     // clickedSP.push($(this).data('val'));
@@ -300,7 +294,6 @@ conf.apiName = apiN;
       conf["provider-conf"]["provider-name"] = "app";
       conf.applicationId = "("+apps+")";;
       apiId = 0;
-      apiN ='';
       $.ajax({
           url: gadgetLocation + '/gadget-controller.jag?action=getData',
           method: "POST",
@@ -308,12 +301,11 @@ conf.apiName = apiN;
           contentType: "application/json",
           async: false,
           success: function (data) {
-            // alert("loadApi :" +JSON.stringify(data));
 
               $("#dropdown-api").empty();
               var apis = [];
               var loadedApis = [];
-              var apiItems = '<li><a data-val="0" href="#">All</a></li>';
+              var apiItems = '<li><a data-val="0" href="#">All Api</a></li>';
               for ( var i =0 ; i < data.length; i++) {
                   var api = data[i];
                   if($.inArray(api.apiID, loadedApis)<0){
@@ -323,15 +315,14 @@ conf.apiName = apiN;
               }
 
               $("#dropdown-api").html( $("#dropdown-api").html() + apiItems);
-              $("#button-api").val('<li><a data-val="0" href="#">All</a></li>');
-              $("#button-api").text('All');
+              $("#button-api").val('<li><a data-val="0" href="#">All Api</a></li>');
+           //   $("#button-api").text('All');
               // loadApp(sps[i]);
               $("#dropdown-api li a").click(function(){
                   $("#button-api").text($(this).text());
-                  $("#button-api").append('<span class="caret"></span>');
+                  $("#button-api").append('&nbsp;<span class="caret"></span>');
                   $("#button-api").val($(this).text());
                   apiId = $(this).data('val');
-                  apiN = $(this).text();
               });
 
           }

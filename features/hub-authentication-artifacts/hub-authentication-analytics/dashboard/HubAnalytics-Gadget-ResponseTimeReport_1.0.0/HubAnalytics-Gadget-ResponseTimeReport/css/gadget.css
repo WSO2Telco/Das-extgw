@@ -348,6 +348,61 @@ body.dark .list-group-item{
     text-align: right;
 }
 
+/************* custom style ************/
+
+
+.filterDiv .dropdown-toggle{
+    min-width: 25%;
+    background-color: #F2F2F2;
+}
+
+.dark .filterDiv .dropdown-toggle{
+    min-width: 25%;
+    background-color: #999;
+    color:#ffffff;
+}
+
+.curve-btn{
+    border-radius: 2px;
+}
+
+.filterDiv .btn-label{ text-align: center;}
+
+span{ font-family: "Roboto", Arial, Helvetica, sans-serif;}
+
+body.dark svg.marks .mark-group .background {
+    fill: #1E2531 !important;
+}
+
+.filterDiv .dropdown-menu {
+    left: 18px !important;
+    background-color: #ffffff;
+    box-shadow: 0 0.1em 0.25em rgba(0, 0, 0, 0.1), 0 0.1em 0.2em rgba(0, 0, 0, 0.1);
+}
+
+.dark .filterDiv .dropdown-menu {
+    color:#ffffff;
+    background-color: #999999;
+    box-shadow: 0 0.1em 0.25em rgba(0, 0, 0, 0.1), 0 0.1em 0.2em rgba(0, 0, 0, 0.1);
+}
+
+.dark .filterDiv .dropdown-menu > li > a { color: #ffffff;}
+
+.dark .filterDiv .dropdown-menu > li > a:focus , .dark .filterDiv .dropdown-menu > li > a:hover  { color: #333333 !important;}
+
+.filterDiv{
+    background: #E3E5E6;
+    padding: 20px 0px;
+}
+
+.dark .filterDiv{
+    background: #444444;
+    padding: 20px 0px;
+}
+/********************* end style ****************/
+
+
+
 
 
 
