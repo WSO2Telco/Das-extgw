@@ -1,0 +1,174 @@
+<%
+/**
+ *  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ *  WSO2 Inc. licenses this file to you under the Apache License,
+ *  Version 2.0 (the "License"); you may not use this file except
+ *  in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an
+ *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *  KIND, either express or implied.  See the License for the
+ *  specific language governing permissions and limitations
+ *  under the License.
+ *
+ */
+(function () {
+    include("../HubAnalytics-Gadget-Commons/constants.jag");
+    include("../HubAnalytics-Gadget-Commons/controller-util.jag");
+
+    var log = new Log();
+    response.contentType = 'application/json';
+
+    var FILE_NAME = FILE_NAMES.TRAFFIC_REPORT;
+
+    var action = request.getParameter("action");
+    var filter = request.getParameter("filter");
+    var data = request.getContent();
+
+    var loggedInUser = getLoggedInUser();
+
+    var providerConf = data[PROVIDER_CONF];
+
+    if (action === "getLoggedInUser") {
+        var jsonUser = {"LoggedInUser": loggedInUser};
+        print(jsonUser);
+        return;
+    }
+
+    if (action === 'getSchema') {
+        var providerAPI = require('js/core/' + providerConf[PROVIDER_NAME] + '-provider-api.js');
+        print(providerAPI.getSchema(providerConf));
+        return;
+
+    } else if (action === 'getData') {
+        var providerAPI = require('js/core/' + providerConf[PROVIDER_NAME] + '-provider-api.js');
+        var serviceProvider = "";
+        if (loggedInUser.isServiceProvider) {
+            serviceProvider = loggedInUser.username;
+        }
+
+        providerConf.query = "";
+        var all = true;
+        if (providerConf[PROVIDER_NAME] == BATCH) {
+
+            providerConf.query += "year:" + data.year + " AND month:" + getMonth(data.month);
+            //*************************************************************************************************************************************
+            <!--if (loggedInUser.isOperatorAdmin) {
+                providerConf.query += " AND operatorName:" + loggedInUser.operatorNameInProfile;
+
+            } else {
+                if (data.operatorName != "all" && data.operatorName != undefined) {
+                    providerConf.query += " AND operatorName:" + data.operatorName;
+                }
+            }-->
+            //*************************************************************************************************************************************
+            if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
+                //providerConf.query += " AND serviceProviderId:" + "\"" + data.serviceProvider + "\"";
+                providerConf.query += " AND serviceProvider:" + "\"" + data.serviceProvider + "\"";
+            }
+            if (data.applicationName != "0" && data.applicationName != undefined) {
+                providerConf.query += " AND applicationId:" + data.applicationName;
+            }
+
+            if (data.api != "0" && data.api != undefined) {
+                providerConf.query += " AND apiID:" + data.api;
+            }
+            //***********************************************************************************************************************************************
+            //providerConf.query += " AND direction:" + "\"" + "sb" + "\"";
+            //*******************************************************************************************************************************************************
+            //providerConf.tableName = tableName;
+
+        }
+        else if (providerConf[PROVIDER_NAME] == TYPE.OPERATOR) {
+            if (data.operatorName != "all" && data.operatorName != undefined) {
+                providerConf.query += "operatorName:" + "(" + data.operatorName + ")";
+                all = false;
+            }
+        } else if (providerConf[PROVIDER_NAME] == TYPE.SP) {
+            if (data.serviceProvider != "0" && data.operatorName != undefined) {
+                if (data.operatorName != "all") {
+                    //providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")" +" AND operatorName:" + "(" + data.operatorName + ")";
+                    providerConf.query += "serviceProvider:" + "(" + data.serviceProvider + ")" + " AND operatorName:" + "(" + data.operatorName + ")";
+                }
+                else {
+                    //providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")";
+                    providerConf.query += "serviceProvider:" + "(" + data.serviceProvider + ")";     //TODO:need to change for all op and sp
+                }
+                all = false;
+            } else if (loggedInUser.isOperatorAdmin) {
+                providerConf.query += "operatorName:" + "(" + data.operatorName + ")";
+
+            } else if(data.operatorName != undefined){
+                providerConf.query += "operatorName:" + "(" + data.operatorName + ")";
+            }
+        }
+        else if (providerConf[PROVIDER_NAME] == TYPE.APP) {
+            if (data.applicationId != "()" && data.applicationId != "0" && data.operatorName != undefined) {
+                providerConf.query += "applicationId:" + data.applicationId;
+                all = false;
+            } else if(data.operatorName != undefined){
+                providerConf.query += "operatorName:" + "(" + data.operatorName + ")";
+            }
+        }
+
+        var andSign = '';
+        if ((!(loggedInUser.isAdmin) && all == false) || (providerConf[PROVIDER_NAME] == BATCH)) {
+            andSign = ' AND ';
+        }
+
+        if (loggedInUser.isServiceProvider && (providerConf[PROVIDER_NAME] == TYPE.OPERATOR || providerConf[PROVIDER_NAME] == TYPE.SP)) {
+            providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
+            providerConf.tableName = STREAM.API_SUMMERY;
+            //print(providerAPI.getData(providerConf));
+            //return;
+
+        } else if (loggedInUser.isServiceProvider && providerConf[PROVIDER_NAME] == BATCH) {
+            providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
+
+        } else if (loggedInUser.isPublisher && (providerConf[PROVIDER_NAME] == TYPE.OPERATOR || providerConf[PROVIDER_NAME] == BATCH)) {
+            providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
+        }
+        print(providerAPI.getData(providerConf));
+
+        log.info("Table ==> " + providerConf.tableName);
+        log.info("query ==> " + providerConf.query);
+        return;
+    }
+
+}());
+
+function getMonth(month) {
+
+    if (month == 'January') {
+        return 1;
+    } else if (month == 'February') {
+        return 2;
+    } else if (month == 'March') {
+        return 3;
+    } else if (month == 'April') {
+        return 4;
+    } else if (month == 'May') {
+        return 5;
+    } else if (month == 'June') {
+        return 6;
+    } else if (month == 'July') {
+        return 7;
+    } else if (month == 'August') {
+        return 8;
+    } else if (month == 'September') {
+        return 9;
+    } else if (month == 'October') {
+        return 10;
+    } else if (month == 'November') {
+        return 11;
+    } else if (month == 'December') {
+        return 12;
+    }
+};
+
+%>
