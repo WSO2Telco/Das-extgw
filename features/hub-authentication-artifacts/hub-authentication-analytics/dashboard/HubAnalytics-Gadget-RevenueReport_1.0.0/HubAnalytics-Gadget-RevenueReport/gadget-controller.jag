@@ -58,14 +58,14 @@
 
             providerConf.query += "year:" + data.year + " AND month:" + getMonth(data.month);
             //*************************************************************************************************************************************
-            <!--if (loggedInUser.isOperatorAdmin) {
+            /*if (loggedInUser.isOperatorAdmin) {
                 providerConf.query += " AND operatorName:" + loggedInUser.operatorNameInProfile;
 
             } else {
                 if (data.operatorName != "all" && data.operatorName != undefined) {
                     providerConf.query += " AND operatorName:" + data.operatorName;
                 }
-            }-->
+            }*/
             //*************************************************************************************************************************************
             if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
                 //providerConf.query += " AND serviceProviderId:" + "\"" + data.serviceProvider + "\"";
