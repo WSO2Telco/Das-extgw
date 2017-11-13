@@ -392,7 +392,7 @@ $(function () {
                             $("#button-sp").append('&nbsp;<span class="caret"></span>');
                             $("#button-sp").val($(this).text());
                             serviceProviderId = $(this).text();
-                                   console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+serviceProviderId);
+                                   console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+serviceProviderId);
                             // serviceProviderId = spIds;
                             // if(selectedOperator.toString() == "all") {
 

@@ -114,7 +114,7 @@
         else if (providerConf[PROVIDER_NAME] == TYPE.APP) {
             if (data.applicationId != "()" && data.applicationId != "0" && data.operatorName != undefined) {
                 providerConf.query += "applicationId:" + data.applicationId;
-                log.info("##########################"+providerConf.query);
+                log.info("####&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+providerConf.query);
                 all = false;
             } else if(data.operatorName != undefined){
                 providerConf.query += "operatorName:" + "(" + data.operatorName + ")";
