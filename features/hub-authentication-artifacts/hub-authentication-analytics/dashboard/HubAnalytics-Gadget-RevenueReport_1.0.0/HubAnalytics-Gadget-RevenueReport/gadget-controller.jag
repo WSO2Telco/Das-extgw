@@ -57,26 +57,30 @@
         if (providerConf[PROVIDER_NAME] == BATCH) {
 
             providerConf.query += "year:" + data.year + " AND month:" + getMonth(data.month);
+            log.info("YEAR****************MONTH"+providerConf.query);
             //*************************************************************************************************************************************
-            /*if (loggedInUser.isOperatorAdmin) {
+            if (loggedInUser.isOperatorAdmin) {
                 providerConf.query += " AND operatorName:" + loggedInUser.operatorNameInProfile;
 
             } else {
                 if (data.operatorName != "all" && data.operatorName != undefined) {
                     providerConf.query += " AND operatorName:" + data.operatorName;
                 }
-            }*/
+            }
             //*************************************************************************************************************************************
             if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
                 //providerConf.query += " AND serviceProviderId:" + "\"" + data.serviceProvider + "\"";
                 providerConf.query += " AND serviceProvider:" + "\"" + data.serviceProvider + "\"";
+                log.info("********************************************************************8"+providerConf.query);
             }
             if (data.applicationName != "0" && data.applicationName != undefined) {
                 providerConf.query += " AND applicationId:" + data.applicationName;
+                log.info("@@@@@@@@@@@@@APP@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+providerConf.query);
             }
 
             if (data.api != "0" && data.api != undefined) {
                 providerConf.query += " AND apiID:" + data.api;
+                log.info("@@@@@@@@@@@@@API****************************************"+providerConf.query);
             }
             //***********************************************************************************************************************************************
             //providerConf.query += " AND direction:" + "\"" + "sb" + "\"";
@@ -110,6 +114,7 @@
         else if (providerConf[PROVIDER_NAME] == TYPE.APP) {
             if (data.applicationId != "()" && data.applicationId != "0" && data.operatorName != undefined) {
                 providerConf.query += "applicationId:" + data.applicationId;
+                log.info("##########################"+providerConf.query);
                 all = false;
             } else if(data.operatorName != undefined){
                 providerConf.query += "operatorName:" + "(" + data.operatorName + ")";
@@ -129,9 +134,11 @@
 
         } else if (loggedInUser.isServiceProvider && providerConf[PROVIDER_NAME] == BATCH) {
             providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
+            log.info("1111111111111111111111111111111111111"+providerConf.query);
 
         } else if (loggedInUser.isPublisher && (providerConf[PROVIDER_NAME] == TYPE.OPERATOR || providerConf[PROVIDER_NAME] == BATCH)) {
             providerConf.query += andSign + ' _serviceProvider:"' + serviceProvider + '"';
+            log.info("2222222222222222222222222222"+providerConf.query);
         }
         print(providerAPI.getData(providerConf));
 
