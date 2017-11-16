@@ -131,7 +131,6 @@ $(function () {
             contentType: CONTENT_TYPE,
             async: false,
             success: function (data) {
-                console.log(' ----- gadget core draw method ***** ' + JSON.stringify(data));
                 providerData = data;
             }
         });
@@ -294,7 +293,6 @@ $(function () {
                         for ( var i =0 ; i < data.length; i++) {
                             var sp = data[i];
                             if($.inArray(sp.serviceProviderId, loadedSps) < 0){
-                                console.log("sp.serviceProviderId------------"+sp.serviceProviderId);
                                 spItems += '<li><a data-val='+ sp.serviceProviderId +' href="#">' + sp.serviceProvider.replace("@carbon.super","") +'</a></li>'
                                 spIds.push(" "+ "\"" + sp.serviceProvider + "\"");
                                 loadedSps.push(sp.serviceProviderId);
@@ -303,7 +301,6 @@ $(function () {
                         $("#dropdown-sp").html(spItems);
 
                         $("#button-sp").val('<li><a data-val="0" href="#">All Service provider</a></li>');
-                        console.log("pushed ids --- ");
                         loadApp(spIds);
                         $("#dropdown-sp li a").click(function(){
 
@@ -315,11 +312,9 @@ $(function () {
                             // if(selectedOperator.toString() == "all") {
 
                             if(serviceProviderId != "All Service provider") {
-                                console.log("----- 11111 " + serviceProviderId);
                                 loadApp( serviceProviderId);
 
                             } else {
-                                console.log("----- 22222 ");
                                 loadApp(spIds);
 
                             }
@@ -333,7 +328,6 @@ $(function () {
             conf[PROVIDER_CONF][PROVIDER_NAME] = TYPE.SP;
             //applicationId = 0;
             conf.serviceProvider = sps;
-            console.log("------------ " + sps);
             $.ajax({
                 url: gadgetLocation + '/gadget-controller.jag?action=getData',
                 method: METHOD.POST,
