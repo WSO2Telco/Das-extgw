@@ -207,20 +207,20 @@ function getFileAppend(data) {
     var fileAppend="";
     if (data!=null){
 
-        /*if (data.operatorf.trim() != "All Operator" && data.operatorf !=undefined ) {
+        if (data.operatorf !=undefined && data.operatorf.trim() != "All Operator") {
          fileAppend+= data.operatorf+"-";
-         }*/
+         }
 
-        if (data.spf.trim() !="All Service provider" && data.spf !=undefined && data.spf.trim() !="All Service Provider") {
+        if (data.spf !=undefined && data.spf.trim() !="All Service provider" && data.spf.trim() !="All Service Provider") {
             fileAppend += data.spf + "-";
         }
 
 
-        if (data.applicationf.trim() != "All Application" && data.applicationf != undefined ) {
+        if (data.applicationf != undefined && data.applicationf.trim() != "All Application") {
             fileAppend+= data.applicationf+"-";
         }
 
-        if (data.apif.trim() != "All Api" && data.apif != undefined ) {
+        if (data.apif != undefined && data.apif.trim() != "All Api") {
             fileAppend +=  data.apif+"-";
         }
 

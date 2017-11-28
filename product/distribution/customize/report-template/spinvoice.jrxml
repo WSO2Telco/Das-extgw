@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="1000" pageHeight="900" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f9337887-0d4c-4e52-86cc-c63a9b16e57a">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="83"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="R_INVNO" class="java.lang.String"/>
 	<parameter name="R_YEAR" class="java.lang.String"/>
 	<parameter name="R_MONTH" class="java.lang.String"/>
@@ -43,7 +45,7 @@
 	<sortField name="eventType"/>
 	<variable name="sum_opcom" class="java.lang.String" resetType="Group" resetGroup="operation" calculation="Sum"/>
 	<variable name="sum_spshare" class="java.lang.String" resetType="Group" resetGroup="operation" calculation="Sum"/>
-	<variable name="Share for SP_1" class="java.lang.Integer" resetType="Group" resetGroup="operation" calculation="Sum">
+	<variable name="Share for SP_1" class="java.lang.Double" resetType="Group" resetGroup="operation" calculation="Sum">
 		<variableExpression><![CDATA[$F{spshare}]]></variableExpression>
 	</variable>
 	<variable name="Tax_1" class="java.lang.Integer" resetType="Group" resetGroup="operation" calculation="Count">
@@ -55,19 +57,19 @@
 	<variable name="Tax_3" class="java.lang.Integer" resetType="Group" resetGroup="operation" calculation="Sum">
 		<variableExpression><![CDATA[$F{tax}]]></variableExpression>
 	</variable>
-	<variable name="Tax_4" class="java.lang.Integer" resetType="Group" resetGroup="operation" calculation="Sum">
+	<variable name="Tax_4" class="java.lang.Double" resetType="Group" resetGroup="operation" calculation="Sum">
 		<variableExpression><![CDATA[$F{tax}]]></variableExpression>
 	</variable>
-	<variable name="Share for SP_2" class="java.lang.Integer" resetType="Column" calculation="Sum">
+	<variable name="Share for SP_2" class="java.lang.Double" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{spshare}]]></variableExpression>
 	</variable>
 	<variable name="Tax_5" class="java.lang.Integer" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{tax}]]></variableExpression>
 	</variable>
-	<variable name="Tax_6" class="java.lang.Integer" calculation="Sum">
+	<variable name="Tax_6" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{tax}]]></variableExpression>
 	</variable>
-	<variable name="Hub commission_1" class="java.lang.Integer" calculation="Sum">
+	<variable name="Hub commission_1" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{hubshare}]]></variableExpression>
 	</variable>
 	<variable name="Hub commission_2" class="java.lang.Integer" resetType="Group" resetGroup="operation" calculation="Sum">
@@ -82,7 +84,7 @@
 	<group name="operation">
 		<groupExpression><![CDATA[$F{applicationName} + $F{api} + $F{eventType}]]></groupExpression>
 		<groupHeader>
-			<band height="25">
+			<band height="30">
 				<textField evaluationTime="Group" evaluationGroup="operation" pattern="¤ #,##0.00">
 					<reportElement x="674" y="1" width="146" height="20" uuid="dcc54810-9327-4e5f-a28d-275ba4bd6bc6"/>
 					<textElement textAlignment="Right"/>
@@ -97,11 +99,6 @@
 					<reportElement x="419" y="1" width="118" height="20" uuid="238a43f9-e09c-4560-b3e6-dade0779d4e0"/>
 					<textFieldExpression><![CDATA[$F{eventType}]]></textFieldExpression>
 				</textField>
-				<textField evaluationTime="Group" evaluationGroup="operation" pattern="¤ #,##0.00">
-					<reportElement x="538" y="0" width="135" height="20" uuid="63394136-102f-4fae-a70a-f14756e266d3"/>
-					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$V{hubshare_2}]]></textFieldExpression>
-				</textField>
 				<textField>
 					<reportElement x="119" y="0" width="100" height="20" uuid="b28a2242-ddf6-4abf-a200-b9b71637ac10"/>
 					<textFieldExpression><![CDATA[$F{api}]]></textFieldExpression>
@@ -109,6 +106,11 @@
 				<textField>
 					<reportElement x="0" y="0" width="112" height="20" uuid="516f901d-32d1-4074-9842-9d7b9589b6c5"/>
 					<textFieldExpression><![CDATA[$F{applicationName}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="operation" pattern="¤ #,##0.00">
+					<reportElement x="556" y="0" width="118" height="20" uuid="55b60d9c-bc94-4cdd-b158-2d23c5876bc0"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{Share for SP_1}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -351,11 +353,6 @@ CA 94041]]></text>
 				<reportElement x="539" y="38" width="423" height="1" uuid="5008aa54-04bd-4be0-8c1f-0df365496a23"/>
 			</line>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="539" y="13" width="135" height="20" uuid="886a51f7-1054-4e2f-929d-0086e0a7b84d"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$V{Hub commission_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00">
 				<reportElement x="674" y="13" width="147" height="20" uuid="fe6b2238-5736-4a65-ad61-abc30ee849d8"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{Share for SP_2}]]></textFieldExpression>
@@ -364,6 +361,11 @@ CA 94041]]></text>
 				<reportElement x="821" y="13" width="140" height="20" uuid="73230bcc-b391-461f-b16b-06b95b65fc69"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{Tax_6}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="574" y="14" width="100" height="17" uuid="d312a718-bdd2-4e0d-b21b-49df8d02f9ca"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{Share for SP_2}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

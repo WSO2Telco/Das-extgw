@@ -41,7 +41,6 @@ public class BillingStreamProcessor extends StreamProcessor {
                 Object[] parameterSet = compressedEvent.getOutputData();
 
                 String direction = parameterSet[4].toString();
-                
 
                     String api = parameterSet[5].toString();
                     Integer applicationid = Integer.parseInt(parameterSet[8].toString());
@@ -81,10 +80,11 @@ public class BillingStreamProcessor extends StreamProcessor {
 
                     PriceServiceImpl instance = new PriceServiceImpl();
 
-                    if (direction.equals("nb")) {
+                    if (direction.equals("north-bound")) {
                         instance.priceNorthBoundRequest(streamRequestData, categoryEntry.entrySet().iterator().next());
                     } else {
-                        instance.priceSouthBoundRequest(streamRequestData, categoryEntry.entrySet().iterator().next());
+                        //instance.priceSouthBoundRequest(streamRequestData, categoryEntry.entrySet().iterator().next());
+                        streamRequestData.setErrorMessage("invalid direction");
                     }
 
                     parameterSet[20] = streamRequestData.getRateDef();//rate card

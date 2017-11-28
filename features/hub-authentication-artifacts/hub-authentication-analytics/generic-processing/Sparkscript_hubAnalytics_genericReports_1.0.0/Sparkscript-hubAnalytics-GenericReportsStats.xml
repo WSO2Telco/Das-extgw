@@ -411,16 +411,6 @@ CREATE TEMPORARY TABLE OperatorSummary using CarbonAnalytics options (tableName 
     primaryKeys "operatorId"
     );
 
-INSERT INTO TABLE SPSummary SELECT serviceProvider, serviceProviderId FROM APIYearlyTrafficSummary
-        GROUP BY serviceProvider, serviceProviderId;
-
-INSERT INTO TABLE OperatorSummary SELECT operatorId, operatorName FROM APIYearlyTrafficSummary
-        GROUP BY operatorId, operatorName;
-
-INSERT INTO TABLE APISummary SELECT api,serviceProvider,applicationName,operatorId,
-        apiPublisher, serviceProviderId, operatorName, apiPublisherID, apiID, department, applicationId
-        FROM APIYearlyTrafficSummary GROUP BY api,serviceProvider,applicationName,operatorId,
-        apiPublisher, serviceProviderId, operatorName, apiPublisherID, apiID, department, applicationId;
 
 
 

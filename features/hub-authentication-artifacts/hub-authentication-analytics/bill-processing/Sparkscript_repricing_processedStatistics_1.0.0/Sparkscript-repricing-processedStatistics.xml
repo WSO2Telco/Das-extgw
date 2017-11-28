@@ -40,7 +40,7 @@
         hps.responseCode, hps.isSuccess, hps.msisdn, hps.direction, hps.jsonBody, hps.serviceProviderId,
         hps.spUserId , hps.spConsumerKey , hps.errorMessageId , hps.errorText , hps.responseTimeRange, hps.year,
         hps.month, hps.day, hps.hour, hps.operatorName, hps.apiPublisherID, hps.apiID, hps.department,
-        hps.applicationId  FROM ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_PREPROCESSEDRESPONSESTATISTICS hps JOIN WSO2TELCO_PRICING_FAILED_SUMMARY bps ON (hps.requestId = bps.requestId) WHERE hps.direction = bps.direction;
+        hps.applicationId  FROM ORG_WSO2TELCO_ANALYTICS_HUB_STREAM_PREPROCESSEDRESPONSESTATISTICS hps JOIN WSO2TELCO_PRICING_FAILED_SUMMARY bps ON (hps.requestId = bps.requestId);
 
 </Script>
 </Analytics>

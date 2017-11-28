@@ -350,5 +350,4 @@ class PDFReportEngineGenerator implements Runnable {
         }
         return promoMessage;
     }
-
 }

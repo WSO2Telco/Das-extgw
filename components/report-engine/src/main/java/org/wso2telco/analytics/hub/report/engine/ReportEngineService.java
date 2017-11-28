@@ -18,9 +18,15 @@
  */
 package org.wso2telco.analytics.hub.report.engine;
 
+import org.json.JSONException;
+
 public interface ReportEngineService {
 
     void generateCSVReport(String tableName, String query, String reportName, int maxLength, String reportType, String columns,
                            String fromDate, String toDate, String sp);
+
+    void generatePDFReport(String tableName, String query, String reportName, int maxLength, String
+            reportType, String year, String month, boolean isServiceProvider, String loggedInUser,
+                           String billingInfo) throws JSONException;
 
 }
