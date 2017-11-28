@@ -144,7 +144,7 @@
                                 </div>
                             </div>-->
                             <div id="serviceProviderdd">
-                                 <div id="spContainer" class="col-xs-4 col-sm-4 col-md-4 col-lg-2 col-top-pad col-md-top-pad">
+                                 <div id="spContainer" class="col-xs-4 col-sm-4 col-md-4 col-lg-2">
                                     <button id="button-sp" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">All Service provider
                                     &nbsp;<span class="caret"></span></button>
                                     <ul id="dropdown-sp" class="dropdown-menu">
@@ -176,15 +176,15 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-md-push-15 col-lg-push-15">
                                  <div class="row">
-                                <div id="canvas" class="col-sm-push-25 col-xs-push-05"></div>
+                                <div id="canvas" class="col-sm-push-25 col-xs-push-05 "></div>
                             </div>
                             <div class="row">
                                 <span class="btn-lable sm-xs-custom-title" id="tagapi"></span>
                             </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 col-md-push-05 col-lg-push-05">
                                 <div class="row">
                                 <div id="canvas2" class="col-sm-push-25 col-xs-push-05"></div>
                             </div>
@@ -192,14 +192,14 @@
                                 <span class="btn-lable sm-xs-custom-title" id="tagsp"></span>
                             </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="row">
                                 <div id="canvas3" class="col-sm-push-25 col-xs-push-05"></div>
                             </div>
                             <div class="row">
                                 <span class="btn-lable sm-xs-custom-title" id="tagmno"></span>
                             </div>
-                            </div>
+                            </div> -->
                         </div>
                         <br/>
                         <br/>
