@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 public class BillingStreamProcessor extends StreamProcessor {
-
+    
+    private static final String NORTHBOUND = "north-bound";
+    
     protected List<Attribute> init(AbstractDefinition inputDefinition,
                                    ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext
                                            executionPlanContext) {
@@ -80,11 +82,11 @@ public class BillingStreamProcessor extends StreamProcessor {
 
                     PriceServiceImpl instance = new PriceServiceImpl();
 
-                    if (direction.equals("north-bound")) {
+                    if (direction.equalsIgnoreCase(NORTHBOUND)) {
                         instance.priceNorthBoundRequest(streamRequestData, categoryEntry.entrySet().iterator().next());
                     } else {
                         //instance.priceSouthBoundRequest(streamRequestData, categoryEntry.entrySet().iterator().next());
-                        streamRequestData.setErrorMessage("invalid direction");
+                        streamRequestData.setErrorMessage("Price failed :" + streamRequestData.getRequestId() +"," +" invalid direction");
                     }
 
                     parameterSet[20] = streamRequestData.getRateDef();//rate card
