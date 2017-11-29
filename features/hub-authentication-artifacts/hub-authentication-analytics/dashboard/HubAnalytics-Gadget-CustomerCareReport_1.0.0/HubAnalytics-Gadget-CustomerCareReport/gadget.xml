@@ -94,7 +94,7 @@
                     <br/>
                     <div class="row filterDiv">
 					
-						<div id="operatordd">
+						<!--<div id="operatordd">
                             <div class="col-xs-2">
                                 <button id="button-operator" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">All Operator
                                 <span class="caret"></span></button>
@@ -102,7 +102,7 @@
                                     <li><a href="#">All Operator</a></li>
                                 </ul>
                             </div>
-                        </div>  
+                        </div>  -->
 
                         <div class="col-xs-2">
                                     <button id="button-sp" class="btn btn-default dropdown-toggle curve-btn col-xs-12" type="button" data-toggle="dropdown">All Service provider
