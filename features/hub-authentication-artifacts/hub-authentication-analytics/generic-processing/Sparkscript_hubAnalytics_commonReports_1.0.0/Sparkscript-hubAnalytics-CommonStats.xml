@@ -57,7 +57,7 @@
         spark_jdbc_SPSummary.um_id AS serviceProviderId,
         spark_jdbc_operator.operatorname AS operatorName,
         spark_jdbc_am_api.api_provider AS apiPublisherID,
-        concat(concat(spark_jdbc_am_api.api_name,"_v"),spark_jdbc_am_api.api_version) AS apiID,
+        spark_jdbc_am_api.api_id AS apiID,
         spark_jdbc_am_application.application_id AS applicationId
         FROM spark_jdbc_am_subscription
         JOIN spark_jdbc_operatorapps ON (spark_jdbc_am_subscription.application_id = spark_jdbc_operatorapps.applicationid AND spark_jdbc_operatorapps.isactive = 1 )
