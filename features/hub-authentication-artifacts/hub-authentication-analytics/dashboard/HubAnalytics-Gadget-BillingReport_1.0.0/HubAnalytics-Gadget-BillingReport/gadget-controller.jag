@@ -126,7 +126,7 @@
 
             if (loggedInUser.isServiceProvider) {
                 serviceProvider = loggedInUser.username;
-                providerConf.query += " AND serviceProviderId:" + "\"" + serviceProvider + "\"";
+                providerConf.query += " AND serviceProvider:" + "\"" + serviceProvider + "\"";
                 //providerConf.query += " AND direction:" + "\""+ "nb" + "\"";
             } else {
                 if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
