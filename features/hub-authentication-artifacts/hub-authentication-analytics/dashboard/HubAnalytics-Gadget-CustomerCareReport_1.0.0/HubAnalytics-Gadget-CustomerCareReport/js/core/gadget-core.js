@@ -28,7 +28,7 @@ $(function () {
             async: false,
             success: function (data) {
                 conf = JSON.parse(data);             
-                loadOperator();
+                loadSP();
                 addDatatable();
             }
         });        
@@ -138,30 +138,7 @@ $(function () {
         mytable.ajax.reload();
     };
 
-    function loadOperator() {
-        conf["provider-conf"]["provider-name"] = "operator";
-        conf.operatorName = "all";
-        conf.operatorNames = "";
-        
-        $.ajax({
-            url: gadgetLocation + '/gadget-controller.jag?action=getData',
-            method: "POST",
-            data: JSON.stringify(conf),
-            contentType: "application/json",
-            async: false,
-            success: function (data) {
-                $("#button-operator").text('All Operator');
-                $("#button-operator").append('&nbsp;<span class="caret"></span>');
-                conf.operatorNames = setDropdown("#dropdown-operator", "#button-operator", data, conf.operatorName, "operatorName",null, null);
-                loadSP();             
-                $("#dropdown-operator li a").click(function () {                   
-                    providerButtons("#button-operator", this);
-                    conf.operatorName = $(this).data('val');
-                    loadSP();
-                });
-            }
-        });
-    };
+    
 
     function loadSP() {
         conf["provider-conf"]["provider-name"] = "operatorsp";
