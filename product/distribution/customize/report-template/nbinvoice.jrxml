@@ -83,7 +83,7 @@
 	<group name="operation">
 		<groupExpression><![CDATA[$F{subscriber} + $F{applicationName} + $F{api} + $F{eventType}]]></groupExpression>
 		<groupHeader>
-			<band height="31">
+			<band height="24">
 				<textField>
 					<reportElement x="421" y="1" width="105" height="20" uuid="238a43f9-e09c-4560-b3e6-dade0779d4e0"/>
 					<textFieldExpression><![CDATA[$F{eventType}]]></textFieldExpression>
@@ -112,7 +112,7 @@
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="operation" pattern="¤ #,##0.00">
 					<reportElement x="528" y="0" width="100" height="20" uuid="bd691daa-81b0-4f58-874a-4afcb9df7e49"/>
-					<textElement textAlignment="Right"/>
+					<textElement textAlignment="Left"/>
 					<textFieldExpression><![CDATA[$V{Share for SP_1}]]></textFieldExpression>
 				</textField>
 			</band>
