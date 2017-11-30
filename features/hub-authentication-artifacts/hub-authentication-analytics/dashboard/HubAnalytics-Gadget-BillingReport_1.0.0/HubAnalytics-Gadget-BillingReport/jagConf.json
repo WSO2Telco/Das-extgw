@@ -49,11 +49,6 @@
       "label": "Charge Amount"
     },
     {
-      "column": "opCommision",
-      "type": "string",
-      "label": "OPCommision"
-    },
-    {
       "column": "spCommision",
       "type": "string",
       "label": "SPCommision"
@@ -61,7 +56,7 @@
     {
       "column": "hbCommision",
       "type": "string",
-      "label": "HBCommision"
+      "label": "OPCommision"
     },
     {
       "column": "tax",
