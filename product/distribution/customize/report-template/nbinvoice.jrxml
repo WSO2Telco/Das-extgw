@@ -378,7 +378,7 @@ CA 94041]]></text>
 			</line>
 			<textField pattern="¤ #,##0.00">
 				<reportElement x="528" y="13" width="100" height="22" uuid="69deba6f-d1f5-4fa1-bd8f-5505616b630a"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$V{Share for SP_2}]]></textFieldExpression>
 			</textField>
 		</band>
