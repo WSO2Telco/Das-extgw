@@ -59,11 +59,11 @@
         var all = true;
         if (providerConf[PROVIDER_NAME] == BATCH) {
             if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
-                providerConf.query += " AND serviceProvider: (" + "\"" + data.serviceProvider + "\")";
+                providerConf.query += " AND serviceProviderId: (" + "\"" + data.serviceProvider + "\")";
             }
         } else if (providerConf[PROVIDER_NAME] == TYPE.SP) {
             if (data.serviceProvider != "0" && data.operatorName != undefined) {
-                providerConf.query += "serviceProvider:" + "(" + data.serviceProvider + ")";
+                providerConf.query += "serviceProviderId:" + "(" + data.serviceProvider + ")";
                 all = false;
             }
         }
@@ -130,7 +130,7 @@
                 //providerConf.query += " AND direction:" + "\""+ "nb" + "\"";
             } else {
                 if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
-                    providerConf.query += " AND serviceProvider:" + "\"" + data.serviceProvider + "\"";
+                    providerConf.query += " AND serviceProviderId:" + "\"" + data.serviceProvider + "\"";
                 }
             }
 
@@ -172,7 +172,7 @@
                 //providerConf.query += " AND direction:" + "\""+ "nb" + "\"";
             } else {
                 if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
-                    providerConf.query += " AND serviceProvider:" + "\"" + data.serviceProvider + "\"";
+                    providerConf.query += " AND serviceProviderId:" + "\"" + data.serviceProvider + "\"";
                 }
             }
 
@@ -212,7 +212,7 @@
                 providerConf.query += " AND serviceProvider:" + "\"" + serviceProvider + "\"";
             } else {
                 if (data.serviceProvider != "0" && data.serviceProvider != undefined) {
-                    providerConf.query += " AND serviceProvider:" + "\"" + data.serviceProvider + "\"";
+                    providerConf.query += " AND serviceProviderId:" + "\"" + data.serviceProvider + "\"";
                 }
             }
 

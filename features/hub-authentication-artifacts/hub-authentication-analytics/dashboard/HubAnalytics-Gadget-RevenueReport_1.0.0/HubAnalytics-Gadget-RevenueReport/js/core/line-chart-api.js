@@ -15,7 +15,7 @@
  */
 var getConfig, validate, isProviderRequired, draw, update;
 
-(function() {
+(function () {
 
     var CHART_LOCATION = '/extensions/chart-templates/';
 
@@ -23,7 +23,7 @@ var getConfig, validate, isProviderRequired, draw, update;
      * return the config to be populated in the chart configuration UI
      * @param schema
      */
-    getConfig = function(schema) {
+    getConfig = function (schema) {
         var chartConf = require(CHART_LOCATION + '/line-chart/config.json').config;
         /*
          dynamic logic goes here
@@ -50,14 +50,14 @@ var getConfig, validate, isProviderRequired, draw, update;
      * validate the user inout for the chart configuration
      * @param chartConfig
      */
-    validate = function(chartConfig) {
+    validate = function (chartConfig) {
         return true;
     };
 
     /**
      * TO be used when provider configuration steps need to be skipped
      */
-    isProviderRequired = function() {
+    isProviderRequired = function () {
 
     }
 
@@ -68,7 +68,7 @@ var getConfig, validate, isProviderRequired, draw, update;
      * @param schema
      * @param data
      */
-    draw = function(placeholder, chartConfig, _schema, data) {
+    draw = function (placeholder, chartConfig, _schema, data) {
         _schema = updateUserPrefXYTypes(_schema, chartConfig);
         var schema = toVizGrammarSchema(_schema);
 
@@ -83,7 +83,6 @@ var getConfig, validate, isProviderRequired, draw, update;
         var groupDataMNO = [];
         var arcConfig = buildChart2Config(chartConfig);
         var archConfigSp = buildChart2ConfigSP(chartConfig);
-        var archConfigMNO = buildChart2ConfigMNO(chartConfig);
         var totalAmount = 0;
         var groupRow;
         var dataFlag = false;
@@ -98,10 +97,8 @@ var getConfig, validate, isProviderRequired, draw, update;
             dataFlag = true;
             var notAvailable = true;
             var notAvailableSp = true;
-            var notAvailableMNO = true;
             var groupRow = JSON.parse(JSON.stringify(row));
             var groupRowSP = JSON.parse(JSON.stringify(row));
-            var groupRowMNO = JSON.parse(JSON.stringify(row));
 
 
             groupData.forEach(function (row2) {
@@ -115,13 +112,6 @@ var getConfig, validate, isProviderRequired, draw, update;
                     notAvailableSp = false;
                 }
             });
-
-            groupDataMNO.forEach(function (row2) {
-                if (groupRowMNO[archConfigMNO.color] == row2[archConfigMNO.color]) {
-                    notAvailableMNO = false;
-                }
-            });
-
             if (notAvailable) {
                 groupRow[arcConfig.x] = 0;
 
@@ -144,17 +134,6 @@ var getConfig, validate, isProviderRequired, draw, update;
                 });
 
                 groupDataSP.push(groupRowSP);
-            }
-
-            if (notAvailableMNO) {
-                groupRowMNO[archConfigMNO.x] = 0;
-                data.forEach(function (row2) {
-
-                    if (groupRowMNO[archConfigMNO.color] == row2[archConfigMNO.color]) {
-                        groupRowMNO[archConfigMNO.x] += row2[archConfigMNO.x];
-                    }
-                });
-                groupDataMNO.push(groupRowMNO);
             }
         });
 
@@ -200,27 +179,6 @@ var getConfig, validate, isProviderRequired, draw, update;
                 }
             };
 
-            var view3 = {
-                id: "chart-3",
-                schema: schema,
-                chartConfig: archConfigMNO,
-                data: function () {
-                    if (groupDataMNO) {
-                        var result = [];
-                        groupDataMNO.forEach(function (item) {
-                            item[archConfigMNO.x] = Math.round((item[archConfigMNO.x] / totalAmount) * 100);
-
-                            var row = [];
-                            schema[0].metadata.names.forEach(function (name) {
-                                row.push(item[name]);
-                            });
-                            result.push(row);
-                        });
-                        wso2gadgets.onDataReady(getHighestVal(result.sort(compare)));
-                    }
-                }
-            };
-
             try {
                 wso2gadgets.init("#canvas", view1);
                 var view1 = wso2gadgets.load("chart-1");
@@ -229,10 +187,6 @@ var getConfig, validate, isProviderRequired, draw, update;
                 wso2gadgets.init("#canvas2", view2);
                 var view2 = wso2gadgets.load("chart-2");
                 $('#tagsp').html("<h3 class='rev-rep'>Service Provider Revenue</h3>");
-
-                wso2gadgets.init("#canvas3", view3);
-                var view2 = wso2gadgets.load("chart-3");
-                $('#tagmno').html("<h3 class='rev-rep'>Operator Revenue</h3>");
 
             } catch (e) {
                 console.error(e);
@@ -245,7 +199,7 @@ var getConfig, validate, isProviderRequired, draw, update;
     };
 
     //sort array by totalAmount
-    compare = function(a, b) {
+    compare = function (a, b) {
         return a[6] - b[6];
         //return a[15] - b[15]; //TODO:undo this to 6
 
@@ -255,7 +209,7 @@ var getConfig, validate, isProviderRequired, draw, update;
         if (array.length >= 10) {
             return array;
         } else {
-            return array.slice(0,10);
+            return array.slice(0, 10);
         }
     }
 
@@ -263,11 +217,11 @@ var getConfig, validate, isProviderRequired, draw, update;
      *
      * @param data
      */
-    update = function(data) {
+    update = function (data) {
         wso2gadgets.onDataReady(data, "append");
     };
 
-    buildChart2Config = function(_chartConfig) {
+    buildChart2Config = function (_chartConfig) {
         var conf = {};
         conf.x = _chartConfig.count;
         conf.color = _chartConfig.colorAPI;
@@ -275,7 +229,7 @@ var getConfig, validate, isProviderRequired, draw, update;
         conf.width = 300;
         conf.xType = _chartConfig.xType;
         conf.yType = _chartConfig.yType;
-        conf.padding = { "top": 0, "left": 0, "bottom": 40, "right": 30 };
+        conf.padding = {"top": 0, "left": 0, "bottom": 40, "right": 30};
         conf.maxLength = _chartConfig.maxLength;
         conf.charts = [];
         conf.charts[0] = {
@@ -286,7 +240,7 @@ var getConfig, validate, isProviderRequired, draw, update;
         return conf;
     };
 
-    buildChart2ConfigSP = function(_chartConfig) {
+    buildChart2ConfigSP = function (_chartConfig) {
         var conf = {};
         conf.x = _chartConfig.count;
         conf.color = _chartConfig.colorSP;
@@ -294,7 +248,7 @@ var getConfig, validate, isProviderRequired, draw, update;
         conf.width = 300;
         conf.xType = _chartConfig.xType;
         conf.yType = _chartConfig.yType;
-        conf.padding = { "top": 0, "left": 0, "bottom": 40, "right": 30 };
+        conf.padding = {"top": 0, "left": 0, "bottom": 40, "right": 30};
         conf.maxLength = _chartConfig.maxLength;
         conf.charts = [];
         conf.charts[0] = {
@@ -304,25 +258,4 @@ var getConfig, validate, isProviderRequired, draw, update;
 
         return conf;
     };
-
-    buildChart2ConfigMNO = function(_chartConfig) {
-        var conf = {};
-        conf.x = _chartConfig.count;
-        conf.color = _chartConfig.colorMNO;
-        conf.height = 300;
-        conf.width = 300;
-        conf.xType = _chartConfig.xType;
-        conf.yType = _chartConfig.yType;
-        conf.padding = { "top": 0, "left": 0, "bottom": 40, "right": 50 };
-        conf.maxLength = _chartConfig.maxLength;
-        conf.charts = [];
-        conf.charts[0] = {
-            type: "arc",
-            mode: "pie"
-        };
-
-        return conf;
-    };
-
-
 }());

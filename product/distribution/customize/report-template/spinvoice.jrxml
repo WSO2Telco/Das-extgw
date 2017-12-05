@@ -84,7 +84,7 @@
 	<group name="operation">
 		<groupExpression><![CDATA[$F{applicationName} + $F{api} + $F{eventType}]]></groupExpression>
 		<groupHeader>
-			<band height="30">
+			<band height="23">
 				<textField evaluationTime="Group" evaluationGroup="operation" pattern="¤ #,##0.00">
 					<reportElement x="674" y="1" width="146" height="20" uuid="dcc54810-9327-4e5f-a28d-275ba4bd6bc6"/>
 					<textElement textAlignment="Right"/>
@@ -363,7 +363,7 @@ CA 94041]]></text>
 				<textFieldExpression><![CDATA[$V{Tax_6}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="574" y="14" width="100" height="17" uuid="d312a718-bdd2-4e0d-b21b-49df8d02f9ca"/>
+				<reportElement x="556" y="13" width="117" height="17" uuid="d312a718-bdd2-4e0d-b21b-49df8d02f9ca"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{Share for SP_2}]]></textFieldExpression>
 			</textField>

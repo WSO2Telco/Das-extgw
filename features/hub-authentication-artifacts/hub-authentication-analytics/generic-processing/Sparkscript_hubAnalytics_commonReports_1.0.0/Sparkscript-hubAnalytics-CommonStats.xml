@@ -54,10 +54,10 @@
 
         insert overwrite table APISummary select spark_jdbc_am_api.api_name as api, concat(spark_jdbc_am_subscription.created_by,"@carbon.super") AS serviceProvider, spark_jdbc_am_application.name AS applicationName, spark_jdbc_operator.id AS operatorId,
         spark_jdbc_am_api.api_provider AS apiPublisher,
-        concat(spark_jdbc_am_subscription.created_by,"@carbon.super") AS serviceProviderId,
+        spark_jdbc_SPSummary.um_id AS serviceProviderId,
         spark_jdbc_operator.operatorname AS operatorName,
         spark_jdbc_am_api.api_provider AS apiPublisherID,
-        concat(concat(spark_jdbc_am_api.api_name,"_v"),spark_jdbc_am_api.api_version) AS apiID,
+        spark_jdbc_am_api.api_id AS apiID,
         spark_jdbc_am_application.application_id AS applicationId
         FROM spark_jdbc_am_subscription
         JOIN spark_jdbc_operatorapps ON (spark_jdbc_am_subscription.application_id = spark_jdbc_operatorapps.applicationid AND spark_jdbc_operatorapps.isactive = 1 )
@@ -65,7 +65,8 @@
         JOIN spark_jdbc_am_application ON (spark_jdbc_am_subscription.application_id = spark_jdbc_am_application.application_id)
         JOIN spark_jdbc_am_api ON (spark_jdbc_am_subscription.api_id= spark_jdbc_am_api.api_id)
         JOIN spark_jdbc_operatorendponts ON ( spark_jdbc_operatorendponts.operatorid = spark_jdbc_operatorapps.operatorid AND spark_jdbc_operatorendponts.api = spark_jdbc_am_api.api_name )
-        JOIN spark_jdbc_endpointapps ON (spark_jdbc_endpointapps.endpointid = spark_jdbc_operatorendponts.id AND spark_jdbc_endpointapps.applicationid = spark_jdbc_am_application.application_id AND spark_jdbc_endpointapps.isactive=1 );
+        JOIN spark_jdbc_endpointapps ON (spark_jdbc_endpointapps.endpointid = spark_jdbc_operatorendponts.id AND spark_jdbc_endpointapps.applicationid = spark_jdbc_am_application.application_id AND spark_jdbc_endpointapps.isactive=1 )
+        JOIN spark_jdbc_SPSummary ON (spark_jdbc_SPSummary.um_user_name= spark_jdbc_am_subscription.created_by);
 
         INCREMENTAL_TABLE_COMMIT APISummary;                    
 

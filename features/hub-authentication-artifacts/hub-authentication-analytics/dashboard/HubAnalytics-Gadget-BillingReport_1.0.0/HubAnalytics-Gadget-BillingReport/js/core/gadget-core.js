@@ -135,7 +135,7 @@ $(function () {
     });
 
     function setConfDara() {
-		conf.spf= $("#button-sp").text();
+		conf.spf= $("#button-sp").text().trim();
     };
 
     $("#button-initiate-reprice").click(function () {

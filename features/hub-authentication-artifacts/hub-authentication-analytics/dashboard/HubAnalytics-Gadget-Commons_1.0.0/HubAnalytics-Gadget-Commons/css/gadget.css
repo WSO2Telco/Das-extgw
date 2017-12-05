@@ -76,7 +76,7 @@ body.widget {
 }
 
 .rev-rep {
-    margin-left:23%;
+    margin-left:11%;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
@@ -84,7 +84,7 @@ body.widget {
     font-size: 12px;
     line-height: normal;
     font-family: sans-serif;
-    fill: rgb(34, 34, 34);
+    color: #999090;
 }
 
 .status-message {
@@ -537,6 +537,12 @@ body[media-screen=md] .col-md-2 {
 body[media-screen=md] .col-md-1 {
     width: 8.33333333% ;
 }
+body[media-screen=md] .col-md-push-05 {
+    margin-left: 5%;
+}
+body[media-screen=md] .col-md-push-15 {
+    margin-left: 15%;
+}
 
 body[media-screen=xs] .col-xs-12 {
     width: 100% ;
@@ -612,6 +618,15 @@ body[media-screen=lg] .col-lg-1 {
     width: 8.33333333% ;
 }
 
+body[media-screen=lg] .col-lg-push-05 {
+    margin-left: 5%;
+}
+
+body[media-screen=lg] .col-lg-push-15 {
+    margin-left: 15%;
+}
+
+
 body[media-screen=sm] .col-sm-push-05 {
     margin-left: 5%;
 }
@@ -648,9 +663,9 @@ body[media-screen=xs] { padding-bottom:0px !important;}
 
 body[media-screen=sm] .sm-xs-custom-title .rev-rep,
 body[media-screen=xs] .sm-xs-custom-title .rev-rep{
-    margin-top: -5%;
+    margin-top: -2%;
     margin-bottom: 10%;
-    margin-left: 30% !important;
+    margin-left: 33% !important;
 }
 
 body[media-screen=lg] .dropdown-menu{width: 87%;}
