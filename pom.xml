@@ -7,7 +7,7 @@
         <version>1</version>
     </parent>
     <groupId>org.wso2telco.analytics</groupId>
-    <artifactId>org.wso2telco.analytics.hub</artifactId>
+    <artifactId>org.wso2telco.analytics.extgw</artifactId>
     <version>2_1_0-SNAPSHOT</version>
     <modules>
         <module>components/report-generator-extension</module>
@@ -24,7 +24,7 @@
 
     <packaging>pom</packaging>
 
-    <name>WSO2Telco - Telco Analytics Common Aggregator Module</name>
+    <name>WSO2Telco - Telco Analytics External Gateway</name>
 
     <dependencyManagement>
         <dependencies>
